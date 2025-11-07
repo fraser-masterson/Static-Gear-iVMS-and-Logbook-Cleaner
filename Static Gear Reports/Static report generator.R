@@ -47,7 +47,7 @@ params = list(quarter = 'Custom', # Input quarter ('1', '2', '3', '4', 'Annual',
 reports_dir = "~/Documents/IoM 2025/Static Gear Reports/" # Directory of this code and report code files
 
 joined_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for Join csv files (e.g., Join5.csv)
-cleaned_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for cleaned VMS, logbook, and XCheck/comments data
+cleaned_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for cleaned VMS and logbook data
 reference_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for reference data csv files with following format:
 shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for shapefiles
 # -----------------------------------------------------------------------------
@@ -63,7 +63,6 @@ shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for sha
     
     logbook = read.csv(paste0(cleaned_data_dir, "combinedlog_O10_U10m.csv"))
     vms = read.csv(paste0(cleaned_data_dir, "ivms_cleaned.csv"))
-    check = read.csv(paste0(cleaned_data_dir, "XCheckSummary.csv")) # All comments for mismatched vms/logbook data
     
     lob_ref = read_csv(paste0(reference_data_dir, "Lobster_records_IoM.csv")) 
     whelk_ref = read_csv(paste0(reference_data_dir, "Whelk_records_IoM.csv"))
@@ -84,22 +83,6 @@ shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for sha
     IoM = st_transform(IoM, crs = 4326)
     IOM12NM = concaveman(nm12)
     IOM3NM = concaveman(nm3)
-    
-    check$uniqueID = paste(check$RSS.No, check$date, sep = '_')
-    check = check[, -c(1:4)]
-    logbook = logbook %>%
-      left_join(check, by = 'uniqueID')
-    logbook <- logbook %>%
-      mutate(Exclude.IVMS = replace_na(Exclude.IVMS, 0))
-    Join5 = Join5 %>%
-      left_join(check, by = 'uniqueID')
-    Join5 <- Join5 %>%
-      mutate(Exclude.IVMS = replace_na(Exclude.IVMS, 0))
-    vms = vms %>%
-      left_join(check, by = 'uniqueID')
-    vms <- vms %>%
-      mutate(Exclude.IVMS = replace_na(Exclude.IVMS, 0))
-    
     
     if (params$quarter == '1') {
       dates = '1st January - 31st March'
