@@ -38,7 +38,7 @@ params = list(quarter = 'Custom', # Input quarter ('1', '2', '3', '4', 'Annual',
               
               year = '2024', # Input year in 'YYYY' format (e.g., 2023, 2024, etc.); redundant if quarter = 'Custom' or 'All'
               DEFA = 'TRUE', # If report is for DEFA: TRUE, if public: FALSE
-              species = 'Crab and lobster', # 'Crab and lobster', or 'Whelk'
+              species = 'Whelk', # 'Crab and lobster', or 'Whelk'
               
               # Only necessary if quarter = 'Custom'
               start_date = '01/01/2021', # 'dd/mm/YYYY'
@@ -46,9 +46,9 @@ params = list(quarter = 'Custom', # Input quarter ('1', '2', '3', '4', 'Annual',
 
 reports_dir = "~/Documents/IoM 2025/Static Gear Reports/" # Directory of this code and report code files
 
-joined_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for Join csv files (e.g., Join5.csv)
+joined_data_dir = "~/Documents/IoM 2025/Data/Cleaned/Joined data/" # Directory for Join csv files (e.g., Join5.csv)
 cleaned_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for cleaned VMS and logbook data
-reference_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for reference data csv files with following format:
+reference_data_dir = "~/Documents/IoM 2025/Data/Cleaned/" # Directory for reference data csv files
 shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for shapefiles
 # -----------------------------------------------------------------------------
 
@@ -61,12 +61,9 @@ shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for sha
     Join10s.4 = read_csv(paste0(joined_data_dir, "Join10s_4.csv"))
     Join10m.5 = read_csv(paste0(joined_data_dir, "Join10m_5.csv"))
     
-    logbook = read.csv(paste0(cleaned_data_dir, "combinedlog_O10_U10m.csv"))
-    vms = read.csv(paste0(cleaned_data_dir, "ivms_cleaned.csv"))
-    
-    lob_ref = read_csv(paste0(reference_data_dir, "Lobster_records_IoM.csv")) 
-    whelk_ref = read_csv(paste0(reference_data_dir, "Whelk_records_IoM.csv"))
-    crab_ref = read_csv(paste0(reference_data_dir, "Crab_records_IoM.csv"))
+    logbook = read.csv(paste0(cleaned_data_dir, "LB_ALL/combinedlog_O10_U10m.csv"))
+    vms = read.csv(paste0(cleaned_data_dir, "iVMS/ivms_cleaned.csv"))
+
     all_ref = read_csv(paste0(reference_data_dir, "IOM_Logbook _ReferencePeriod.csv"))
     
     nm12 <- st_read(paste0(shapefiles_dir, "Base/IoM_12nm_marbdy_arc_bng.shp")) # 12nm territorial sea
@@ -83,6 +80,7 @@ shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for sha
     IoM = st_transform(IoM, crs = 4326)
     IOM12NM = concaveman(nm12)
     IOM3NM = concaveman(nm3)
+    
     
     if (params$quarter == '1') {
       dates = '1st January - 31st March'

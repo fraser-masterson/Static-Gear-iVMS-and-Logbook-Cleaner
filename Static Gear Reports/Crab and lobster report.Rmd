@@ -219,10 +219,6 @@ clsum$month <- factor(clsum$month, levels = month.abb) # put the months in the r
 ```
 
 ```{r Get monthly landing averages between reference period of 2010-2015, echo = FALSE, message = FALSE, warning = FALSE}
-cl_ref = data.frame('Date' = as.POSIXct(all_ref$Date, format = '%d/%m/%Y', tz = 'UTC'),
-                    'lp_hauled' = all_ref$lp_hauled,
-                    'hg_retained' = all_ref$hg_retained,
-                    'cp_retained' = all_ref$cp_retained)
 
 cl_ref$hg_retained = if_else(is.na(cl_ref$hg_retained), 0, cl_ref$hg_retained)
 cl_ref$cp_retained = if_else(is.na(cl_ref$cp_retained), 0, cl_ref$cp_retained)

@@ -182,7 +182,10 @@ whelksum$month <- factor(whelksum$month, levels = month.abb) # put the months in
 ```
 
 ```{r Get monthly LPUE and landing averages between reference period of 2010-2015, echo = FALSE, message = FALSE, warning = FALSE}
-whelk_ref$Date = as.POSIXct(whelk_ref$Date, format = '%d/%m/%Y', tz = 'UTC')
+whelk_ref = data.frame('Date' = as.POSIXct(all_ref$Date, format = '%d/%m/%Y', tz = 'UTC'),
+                    'wp_hauled' = all_ref$wp_hauled,
+                    'bu_retained' = all_ref$bu_retained)
+
 whelk_ref$month = months.POSIXt(whelk_ref$Date, abbreviate = TRUE)
 whelk_ref$year = substr(whelk_ref$Date, 1, 4)
 whelk_ref = filter(whelk_ref, year == '2010' | year == '2011' | year == '2012' | year == '2013' | year == '2014' | year == '2015')
