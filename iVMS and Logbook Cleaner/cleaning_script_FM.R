@@ -5,7 +5,7 @@
 ## Original scripts were made by Dr Isobel Bloor and Dr Matt Coleman (Bangor University). 
 
 ## -------------------------------------------------------------------------------
-## Author: Fraser Masterson; Thu Nov 6 2025
+## Author: Fraser Masterson, Isobel Bloor, Matt Coleman; Thu Nov 6 2025
 
 
 require(dplyr)
