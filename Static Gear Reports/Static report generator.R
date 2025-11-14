@@ -61,14 +61,14 @@ shapefiles_dir = "~/Documents/IoM 2025/Data/Raw/Shapefiles/" # Directory for sha
     Join10s.4 = read_csv(paste0(joined_data_dir, "Join10s_4.csv"))
     Join10m.5 = read_csv(paste0(joined_data_dir, "Join10m_5.csv"))
     
-    logbook = read.csv(paste0(cleaned_data_dir, "LB_ALL/combinedlog_O10_U10m.csv"))
-    vms = read.csv(paste0(cleaned_data_dir, "iVMS/ivms_cleaned.csv"))
+    logbook = read.csv(paste0(cleaned_data_dir, "combinedlog_O10_U10m.csv"))
+    vms = read.csv(paste0(cleaned_data_dir, "ivms_cleaned.csv"))
 
     all_ref = read_csv(paste0(reference_data_dir, "IOM_Logbook _ReferencePeriod.csv"))
     
-    nm12 <- st_read(paste0(shapefiles_dir, "Base/IoM_12nm_marbdy_arc_bng.shp")) # 12nm territorial sea
-    nm3 <- st_read(paste0(shapefiles_dir, "Base/IoM_3nm_marbdy_arc_bng.shp")) # 3nm boundary
-    IoM <- st_read(paste0(shapefiles_dir, "Base/IOM_WGS.shp")) # IoM shapefile
+    nm12 <- st_read(paste0(shapefiles_dir, "IoM_12nm_marbdy_arc_bng.shp")) # 12nm territorial sea
+    nm3 <- st_read(paste0(shapefiles_dir, "IoM_3nm_marbdy_arc_bng.shp")) # 3nm boundary
+    IoM <- st_read(paste0(shapefiles_dir, "IOM_WGS.shp")) # IoM shapefile
     zones = st_read(paste0(shapefiles_dir, "IoM_lobster_zones.shp")) # 1nm lobster management zones
     whelk_zones = st_read(paste0(shapefiles_dir, "Whelk MGZ_16102023.shp")) # 12nm whelk management zones
     crab_zones = st_read(paste0(shapefiles_dir, "Crab_Grid.shp")) # common crab fishing grounds 1km2
